@@ -1,0 +1,19 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX efo: <http://www.ebi.ac.uk/efo/>
+PREFIX gwas: <http://www.ebi.ac.uk/efo/gwas-diagram/>
+CONSTRUCT {
+ ?Snp obo:RO_0002200 ?traitEFOType .
+ ?traitEFOType ?r ?y
+}
+WHERE { 
+ ?assoc obo:IAO_0000136 ?trait .
+ ?trait rdf:type ?traitEFOType .
+ ?traitEFOType ?r ?y .
+ ?assoc obo:IAO_0000136 ?Snp .
+ ?Snp gwas:EFO_GD00031 ?rsid .
+ ?assoc gwas:EFO_GD00036 ?pval
+}
